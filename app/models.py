@@ -2,8 +2,8 @@ from app import db
 
 class AnyDo(db.Model):
     id = db.Column(db.Integer(),primary_key=True)
-    body = db.Column(db.String())
-    user = db.Column(db.ForeignKey('user.id'))
+    body = db.Column(db.String(300))
+    #user = db.Column(db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<DO %s>' %self.body

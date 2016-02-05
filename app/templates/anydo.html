@@ -1,0 +1,17 @@
+<html>
+
+    <head>
+        <title>
+            Any.Do
+        </title>
+    </head>
+    <body>
+
+        <form method="POST">
+            {{form.csrf_token}}
+            <label>{{form.body.label}}</label>
+            {{form.body}}
+            <input type="submit", value="Submit">
+        </form>
+    </body>
+</html>
