@@ -1,0 +1,12 @@
+#pycharm
+.idea/
+
+#temp files
+*~
+
+#swap files
+*.swp
+*.swo
+
+#byte-compiled files
+*.pyc
