@@ -4,6 +4,16 @@ from .forms import AnyDoForm, RegisterForm, LoginForm
 from .models import AnyDo, User
 from flask import redirect, render_template, flash, g
 from flask.ext.login import login_user, login_required, logout_user, current_user
+from functools import wraps
+
+
+def logout_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if g.user.is_authenticated:
+            return redirect('/anydo')
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @login_manager.user_loader
@@ -15,7 +25,9 @@ def get_user(id):
 def before_request():
     g.user = current_user
 
+
 @app.route('/anydo', methods=['GET','POST'])
+@login_required
 def index():
     form = AnyDoForm()
 
@@ -32,7 +44,9 @@ def index():
         print 'error here'
     return render_template('anydo.html', form=form)
 
+
 @app.route('/register', methods=['Get', 'POST'])
+@logout_required
 def register():
     form = RegisterForm()
 
@@ -44,10 +58,12 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Registered Successfully')
+        return redirect('/login')
     return render_template('register.html', form = form)
 
 
 @app.route('/login', methods=['GET', "POST"])
+@logout_required
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -66,4 +82,5 @@ def login():
 @login_required
 def logout():
     logout_user()
+    g.user = None
     return redirect('/login')

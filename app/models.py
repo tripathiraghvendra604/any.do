@@ -8,7 +8,7 @@ class AnyDo(db.Model):
     def __repr__(self):
         return '<DO %s>' %self.body
 
-class User(db.Model, UserMixin):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(200))
     password = db.Column(db.String(20))
