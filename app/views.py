@@ -2,14 +2,18 @@ from app import app
 from app import db, login_manager
 from .forms import AnyDoForm, RegisterForm, LoginForm
 from .models import AnyDo, User
-from flask import redirect, render_template, flash
-from flask.ext.login import login_user, login_required, logout_user
+from flask import redirect, render_template, flash, g
+from flask.ext.login import login_user, login_required, logout_user, current_user
 
 
 @login_manager.user_loader
 def get_user(id):
     user = User.query.get(id)
     return user
+
+@app.before_request
+def before_request():
+    g.user = current_user
 
 @app.route('/anydo', methods=['GET','POST'])
 def index():
