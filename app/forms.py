@@ -9,3 +9,8 @@ class RegisterForm(Form):
     name = StringField(validators=[DataRequired()])
     email = StringField(validators=[DataRequired(), Email()])
     password = PasswordField(validators=[DataRequired()])
+
+
+class LoginForm(Form):
+    email = StringField(validators=[DataRequired(), Email()])
+    password = PasswordField(validators=[DataRequired()])
