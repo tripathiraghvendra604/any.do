@@ -3,7 +3,7 @@ from app import db, login_manager
 from .forms import AnyDoForm, RegisterForm, LoginForm
 from .models import AnyDo, User
 from flask import redirect, render_template, flash
-from flask.ext.login import login_user
+from flask.ext.login import login_user, login_required, logout_user
 
 
 @login_manager.user_loader
@@ -57,3 +57,9 @@ def login():
             else:
                 return render_template('login.html', form=form)
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
