@@ -1,17 +1,24 @@
-<html>
+{% extends 'base.html' %}
 
-    <head>
-        <title>
-            Any.Do
-        </title>
-    </head>
-    <body>
+{% block content %}
 
-        <form method="POST">
-            {{form.csrf_token}}
-            <label>{{form.body.label}}</label>
+<div class="row">
+    <form class="col s12" method="post">
+        {{form.csrf_token }}
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
             {{form.body}}
-            <input type="submit", value="Submit">
-        </form>
-    </body>
-</html>
+            <label for="{{form.body.id_for_label}}">Task</label>
+
+        </div>
+      </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+    </form>
+  </div>
+
+
+
+{% endblock %}
