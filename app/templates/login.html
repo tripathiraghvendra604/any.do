@@ -1,19 +1,28 @@
 {% extends 'base.html' %}}
 {% block content %}
 
-<div>
-    <form method="post">
-        {{ form.csrf_token}}
-        <label>
-            {{ form.email.label}}
-            {{form.email}}
-        </label><br>
-        <label>
-            {{ form.password.label }}
-            {{ form.password }}
-        </label><br>
-        <input type="submit" value="Login!">
-    </form>
-</div>
 
+
+  <div class="row">
+    <form class="col s12" method="post">
+                {{ form.csrf_token}}
+
+        <div class="row">
+        <div class="input-field col s12">
+            {{form.email}}
+          <label for="form.email.id_for_label">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            {{ form.password }}
+          <label for="form.password.if_for_label">Password</label>
+        </div>
+      </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+        </button>
+
+    </form>
+  </div>
 {% endblock %}
