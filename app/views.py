@@ -84,3 +84,9 @@ def logout():
     logout_user()
     g.user = None
     return redirect('/login')
+
+@app.route('/list')
+@login_required
+def list():
+    list = AnyDo.query.all()
+    return  render_template('list.html', list=list)
