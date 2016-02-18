@@ -90,3 +90,10 @@ def logout():
 def list():
     list = AnyDo.query.all()
     return  render_template('list.html', list=list)
+
+@app.route('/delete/<id>')
+def delete(id):
+    ele = AnyDo.query.get(id)
+    db.session.delete(ele)
+    db.session.commit()
+    return redirect('/list')

@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
+
+{% block css %}
+<link href="{{ url_for('static',filename='list.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+{% endblock css %}
 {% block content %}
 
+
 {% for x in list %}
-  <div class="flow-text">  {{x.body}}<hr/></div>
+  <div class="flow-text" display="block">
+      {{x.body}}
+     <a href="/delete/{{x.id}}"> <i class="medium material-icons" left_margin="0px">done_all</i></a>
+      <hr/></div>
 {% endfor %}
 
 {% endblock %}
